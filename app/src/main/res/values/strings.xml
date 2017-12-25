@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Hospital Locator</string>
+    <string name="title_activity_maps">Hospital Locator</string>
+    <string name="gps_network_not_enabled">GPS or network services are disabled. Do you wish to enable them? </string>
+    <string name="open_location_settings">Enable GPS</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_activity_main">MainActivity</string>
+    
+    <string-array name="array_option_type">
+        <item>Hospital</item>
+        <item>Doctor/Clinic</item>
+        <item>Dentist</item>
+    </string-array>
+
+    <string-array name="array_option_rank">
+        <item>Prominence</item>
+        <item>Distance</item>
+    </string-array>
+</resources>

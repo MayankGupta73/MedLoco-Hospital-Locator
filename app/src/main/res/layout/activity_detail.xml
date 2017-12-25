@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mayank7319gmail.hospitallocator.activities.DetailActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fader"
+        android:elevation="2dp"
+        android:visibility="invisible"
+        android:background="@android:drawable/screen_background_dark_transparent">
+    </FrameLayout>
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:visibility="visible"
+        app:indicatorName="LineScalePulseOutIndicator"
+        app:indicatorColor="@android:color/holo_blue_dark"
+        android:elevation="3dp"
+        android:layout_gravity="center"
+        />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                app:srcCompat="@drawable/medical_placeholder"
+                android:id="@+id/imageView2"
+                android:layout_height="150dp" />
+
+            <TextView
+                android:text="Hospital Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvName"
+                android:padding="5dp"
+                android:layout_marginTop="15dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="?attr/editTextColor" />
+
+            <TextView
+                android:text="Rajinder Nagar, New Delhi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvAddress"
+                android:padding="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:text="Phone Number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView8"
+                android:textColor="@color/place_autocomplete_prediction_primary_text_highlight"
+                android:textStyle="normal|bold"
+                android:padding="5dp"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp" />
+
+
+            <TextView
+                android:text="12345678"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvPhone"
+                android:padding="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:text="Website"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView1a"
+                android:textStyle="normal|bold"
+                android:padding="5dp"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp" />
+
+
+            <TextView
+                android:text="http://www.sgrh.com/"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvWebsite"
+                android:padding="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:text="Rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView7"
+                android:textColor="@color/place_autocomplete_prediction_primary_text_highlight"
+                android:textStyle="normal|bold"
+                android:padding="5dp"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@mipmap/ic_star"
+                    android:id="@+id/imageView3"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:text="3.5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvRating"
+                    android:textColor="@android:color/black"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <TextView
+                android:text="Opening Hours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView1b"
+                android:textStyle="normal|bold"
+                android:padding="5dp"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:text="Monday 24 hours\nTuesday 24 hours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvOpening"
+                android:padding="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="20dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/cast_libraries_material_featurehighlight_text_header_color">
+
+        <Button
+            android:text="Get Directions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnDirections"
+            android:layout_weight="1"
+            android:background="@android:color/holo_orange_light"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp" />
+
+        <Button
+            android:text="Call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnCall"
+            android:layout_weight="1"
+            android:background="@color/colourCall"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
+    </LinearLayout>
+</FrameLayout>
