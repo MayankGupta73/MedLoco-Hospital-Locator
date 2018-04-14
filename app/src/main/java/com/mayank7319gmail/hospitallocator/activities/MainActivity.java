@@ -1,5 +1,6 @@
 package com.mayank7319gmail.hospitallocator.activities;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,11 +22,14 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,6 +40,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mayank7319gmail.hospitallocator.R;
 import com.mayank7319gmail.hospitallocator.models.DistanceDuration;
@@ -58,9 +63,10 @@ import retrofit2.Response;
 
 import static com.mayank7319gmail.hospitallocator.utils.LoadingUtil.enableDisableView;
 
-public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    Marker curmarker;
     LatLng defLocation = new LatLng(28.5, 77); //Delhi
     LatLng curLocation = defLocation;
 
@@ -93,8 +99,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
-//        toolbar.setTitle("Hospital Locator");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        toolbar.setTitle("Hospital Locator");
+        setSupportActionBar(toolbar);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -265,7 +272,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     void initCurrentPointer(LatLng loc){
         mMap.clear();
 
-        mMap.addMarker(new MarkerOptions().position(loc).title("Current Location")
+        curmarker = mMap.addMarker(new MarkerOptions().position(loc).title("Current Location")
                 .snippet("("+loc.latitude+","+loc.longitude+")")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
     }
@@ -306,6 +313,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curLocation,14));
 
                 mapReady = true;
+                curmarker.showInfoWindow();
                 stopLoadingAnimation();
                 Log.d(TAG, "onResponse: Fininshed adding location pointers");
             }
@@ -431,4 +439,18 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        return true;
+    }
 }

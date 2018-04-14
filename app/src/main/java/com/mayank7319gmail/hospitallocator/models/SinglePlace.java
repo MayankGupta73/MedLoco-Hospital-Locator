@@ -13,27 +13,27 @@ import java.util.ArrayList;
 
 @Parcel
 public class SinglePlace {
-    private String id;
-    private String name;
-    private String icon;
+    String id;
+    String name;
+    String icon;
 
     @SerializedName("photos")
-    private ArrayList<Photo> photos;
+    ArrayList<Photo> photos;
 
     @SerializedName("place_id")
-    private String placeId;
+    String placeId;
 
-    private String vicinity;
-    private float rating;
+    String vicinity;
+    float rating;
 
     @SerializedName("geometry")
-    private Geometry geometry;
+    Geometry geometry;
 
-    private LatLng loc;
-    private int distance;
-    private String distanceString;
-    private int timeMinutes;
-    private String timeString;
+    LatLng loc;
+    int distance;
+    String distanceString;
+    int timeMinutes;
+    String timeString;
 
     public SinglePlace(String id, ArrayList<Photo> photos, String icon, String name, String vicinity, String placeId,
                        float rating, LatLng loc, int distance, String distanceString, int timeMinutes, String timeString, Geometry geometry) {

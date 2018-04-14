@@ -5,7 +5,9 @@
     <string name="open_location_settings">Enable GPS</string>
     <string name="cancel">Cancel</string>
     <string name="title_activity_main">MainActivity</string>
-    
+    <string name="search_title">Search for Hospitals</string>
+    <string name="search_hint">Search for nearby hopsitals</string>
+
     <string-array name="array_option_type">
         <item>Hospital</item>
         <item>Doctor/Clinic</item>

@@ -11,8 +11,8 @@ import com.google.android.gms.ads.MobileAds;
  */
 
 public class AdUtil {
-    final static String admobAppId = "ca-app-pub-5628554689532375~4974727410";
-    final static String testId = "ca-app-pub-3940256099942544~3347511713";
+    final static String admobAppId = "ca-app-pub-5628554689532375/7550534268";
+    //final static String testId = "ca-app-pub-3940256099942544~3347511713";
 
     AdView mAdView;
 

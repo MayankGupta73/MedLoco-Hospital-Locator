@@ -12,7 +12,8 @@
         android:background="?attr/colorPrimary"
         android:theme="?attr/actionBarTheme"
         android:minHeight="?attr/actionBarSize"
-        android:id="@+id/toolbar2" />
+        android:id="@+id/toolbar2"
+        android:elevation="1dp" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -54,30 +55,35 @@
         android:id="@+id/llContent">
 
         <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp">
-
-        <Button
-            android:text="Filter Search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnFilter"
-            android:layout_weight="1" />
-
-        <Button
-            android:text="Details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnDetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginLeft="25dp" />
-    </LinearLayout>
+            android:background="#55000000"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="5dp">
+
+            <Button
+                android:id="@+id/btnFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/plain_white"
+                android:text="Filter Search" />
+
+            <Button
+                android:id="@+id/btnDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/plain_white"
+                android:text="Details" />
+        </LinearLayout>
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
