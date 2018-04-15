@@ -6,4 +6,5 @@
     <color name="circular_textview_background">#FF0000</color>
     <color name="colourCall">#039233</color>
     <color name="plain_white">#ffffff</color>
+    <color name="color_url">#2246e7</color>
 </resources>

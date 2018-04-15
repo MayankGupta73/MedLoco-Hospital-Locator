@@ -71,7 +71,7 @@ public class DetailActivity extends AppCompatActivity {
         setLoadingAnimation();
 
         ctx = this;
-        googlePlacesApi = new GooglePlacesApi();
+        googlePlacesApi = new GooglePlacesApi(ctx);
         hospitalListClient = googlePlacesApi.getHospitalListClient();
 
         getDetails(placeId);
@@ -105,6 +105,18 @@ public class DetailActivity extends AppCompatActivity {
         checkAndSet(tvWebsite,place.getWebsite());
         checkAndSet(tvRating,String.valueOf(place.getRating()));
 
+        if(place.getWebsite() != null){
+            tvWebsite.setTextColor(R.color.color_url);
+            tvWebsite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent webIntent = new Intent(Intent.ACTION_VIEW);
+                    webIntent.setData(Uri.parse(place.getWebsite()));
+                    startActivity(webIntent);
+                }
+            });
+        }
+
         String opening = "";
         if(place.getOpeningHours() != null) {
             for (String s : place.getOpeningHours().getWeekday()) {
@@ -135,7 +147,7 @@ public class DetailActivity extends AppCompatActivity {
                 place = response.body().getResult();
 
                 if(place == null)
-                    Log.d(TAG, "onResponse: Result null");
+                    Toast.makeText(ctx,"Unable to find hospital.",Toast.LENGTH_SHORT).show();
                 else {
                     if(place.getPhotos() != null)
                     setPhoto(place.getPhotos().get(0).getPhotoReference());
@@ -146,7 +158,7 @@ public class DetailActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DetailResult> call, Throwable t) {
-                Log.d(TAG, "onFailure: Unable to fetch details");
+//                Log.d(TAG, "onFailure: Unable to fetch details");
                 Toast.makeText(ctx,"Unable to fetch details.",Toast.LENGTH_SHORT).show();
             }
         });

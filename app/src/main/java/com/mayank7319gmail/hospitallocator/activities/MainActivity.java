@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
     Marker curmarker;
-    LatLng defLocation = new LatLng(28.5, 77); //Delhi
-    LatLng curLocation = defLocation;
+    static LatLng defLocation = new LatLng(28.5, 77); //Delhi
+    static LatLng curLocation = defLocation;
 
     int locationType = GooglePlacesApi.TYPE_HOSPITAL;
     int locationRankby = GooglePlacesApi.RANKBY_PROMINENCE;
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
-        toolbar.setTitle("Hospital Locator");
+        //toolbar.setTitle("Hospital Locator");
         setSupportActionBar(toolbar);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -125,8 +125,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        AdRequest adRequest = new AdRequest.Builder().build();
 //        mAdView.loadAd(adRequest);
 
-        googlePlacesApi = new GooglePlacesApi();
-        hospitalListClient = googlePlacesApi.getHospitalListClient();
+            googlePlacesApi = new GooglePlacesApi(ctx);
+            hospitalListClient = googlePlacesApi.getHospitalListClient();
 
         btnDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                                 startActivity(i);
                                 Toast.makeText(ctx, "Restart app after enabling GPS", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         });
 
@@ -189,10 +190,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     @Override
                     public void onLocationChanged(Location location) {
                         curLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                        Log.d(TAG, "onLocationChanged: lat: "+curLocation.latitude);
+                        /*Log.d(TAG, "onLocationChanged: lat: "+curLocation.latitude);
                         Log.d(TAG, "onLocationChanged: long: "+curLocation.longitude);
-                        Log.d(TAG, "onLocationChanged: accuracy: "+location.getAccuracy());
+                        Log.d(TAG, "onLocationChanged: accuracy: "+location.getAccuracy());*/
                         mapAccuracy = location.getAccuracy();
+                        if(mMap != null)
                         initMapPointer(curLocation);
                     }
 
@@ -212,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     }
                 };
 
-                Log.d(TAG, "onCreate: Trying for location");
+//                Log.d(TAG, "onCreate: Trying for location");
                 locMan.requestLocationUpdates(
                         LocationManager.GPS_PROVIDER,
                         100,
@@ -231,7 +233,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-   void setLoadingAnimation(){
+    @Override
+    protected void onStart() {
+        if(mAdView != null)
+            AdUtil.loadAds(mAdView);
+        super.onStart();
+    }
+
+    void setLoadingAnimation(){
        enableDisableView(mainFrame, false);
        fader.setVisibility(View.VISIBLE);
        avi.show();
@@ -247,8 +256,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        if(mMap == null)
+            Log.d(TAG, "onMapReady: map is null");
 
-        Log.d(TAG, "onMapReady: Map is ready");
+//        Log.d(TAG, "onMapReady: Map is ready");
 
         //locMan.removeUpdates(locLis);
         initMapPointer(curLocation);
@@ -265,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             locMan.removeUpdates(locLis);
             getHospitalLocation(curLocation);
-            Log.d(TAG, "initMapPointer: Map location is correct");
+//            Log.d(TAG, "initMapPointer: Map location is correct");
         }
     }
 
@@ -282,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .snippet(vicinity)
                 );
 
-        Log.d(TAG, "addMapMarker: marker "+loc);
+//        Log.d(TAG, "addMapMarker: marker "+loc);
     }
 
     void getHospitalLocation(LatLng loc){
@@ -298,7 +309,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         hospitalListClient.getNearbyHospitals(params).enqueue(new Callback<PlaceList>() {
             @Override
             public void onResponse(Call<PlaceList> call, Response<PlaceList> response) {
-                Log.d(TAG, "onResponse: Response recieved");
+//                Log.d(TAG, "onResponse: Response recieved");
                 placeList = response.body();
 
                 if(placeList != null){
@@ -315,12 +326,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mapReady = true;
                 curmarker.showInfoWindow();
                 stopLoadingAnimation();
-                Log.d(TAG, "onResponse: Fininshed adding location pointers");
+//                Log.d(TAG, "onResponse: Fininshed adding location pointers");
             }
 
             @Override
             public void onFailure(Call<PlaceList> call, Throwable t) {
-                Log.d(TAG, "onFailure: cannot access places api");
+//                Log.d(TAG, "onFailure: cannot access places api");
                 Toast.makeText(ctx,"Unable to access server. Please try again later",Toast.LENGTH_SHORT).show();
             }
         });
@@ -358,8 +369,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     for(int i=0; i<distanceDurations.size(); i++){
                         DistanceDuration d = distanceDurations.get(i);
 
-                        Log.d(TAG, "onResponse: distance"+d.getDistance().getText());
-                        Log.d(TAG, "onResponse: duration"+d.getDuration().getText());
+//                        Log.d(TAG, "onResponse: distance"+d.getDistance().getText());
+//                        Log.d(TAG, "onResponse: duration"+d.getDuration().getText());
 
                         placeList.places.get(i).setDistance(d.getDistance().getValue());
                         placeList.places.get(i).setDistanceString(d.getDistance().getText());
@@ -372,7 +383,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onFailure(Call<DistanceResult> call, Throwable t) {
                 Toast.makeText(ctx,"Unable to access server. Please try again later",Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "onFailure: cannot fetch distances");
+//                Log.d(TAG, "onFailure: cannot fetch distances");
             }
         });
     }

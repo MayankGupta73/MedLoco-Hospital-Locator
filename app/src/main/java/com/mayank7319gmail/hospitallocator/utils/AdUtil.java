@@ -1,22 +1,26 @@
 package com.mayank7319gmail.hospitallocator.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
+
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.mayank7319gmail.hospitallocator.R;
 
 /**
  * Created by Mayank Gupta on 15-12-2017.
  */
 
 public class AdUtil {
-    final static String admobAppId = "ca-app-pub-5628554689532375/7550534268";
+    static String admobAppId;
+    //final static String testId;
     //final static String testId = "ca-app-pub-3940256099942544~3347511713";
-
     AdView mAdView;
 
     public static void initAds(Context ctx){
+        admobAppId = ctx.getString(R.string.admob_app_id);
         MobileAds.initialize(ctx,admobAppId);
     }
 

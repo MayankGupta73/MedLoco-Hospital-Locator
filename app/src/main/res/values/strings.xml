@@ -1,12 +1,13 @@
 <resources>
-    <string name="app_name">Hospital Locator</string>
-    <string name="title_activity_maps">Hospital Locator</string>
+    <string name="app_name">MedLoco</string>
+    <string name="title_activity_maps">MedLoco</string>
     <string name="gps_network_not_enabled">GPS or network services are disabled. Do you wish to enable them? </string>
     <string name="open_location_settings">Enable GPS</string>
     <string name="cancel">Cancel</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="search_title">Search for Hospitals</string>
     <string name="search_hint">Search for nearby hopsitals</string>
+    <string name="message_no_result">Sorry, we could not find any results matching your query. \nPlease try another query.</string>
 
     <string-array name="array_option_type">
         <item>Hospital</item>

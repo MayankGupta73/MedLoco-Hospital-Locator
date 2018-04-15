@@ -1,6 +1,10 @@
 package com.mayank7319gmail.hospitallocator.rest_api;
 
+import android.content.Context;
+import android.content.res.Resources;
+
 import com.google.android.gms.maps.model.LatLng;
+import com.mayank7319gmail.hospitallocator.R;
 
 import java.util.HashMap;
 
@@ -13,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GooglePlacesApi {
 
-    public final static String WEB_KEY = "AIzaSyDGxQEhPHw9Fz7Nc40xzkNB_nag4_rwhIo";
+    public static String WEB_KEY;
     public final static int SEARCH_RADIUS = 3000;
 
     public static final int TYPE_HOSPITAL = 0;
@@ -22,6 +26,13 @@ public class GooglePlacesApi {
 
     public static final int RANKBY_PROMINENCE = 0;
     public static final int RANKBY_DISTANCE = 1;
+
+    Context ctx;
+
+    public GooglePlacesApi(Context ctx) {
+        this.ctx = ctx;
+        WEB_KEY = ctx.getString(R.string.google_maps_web_key);
+    }
 
     public HospitalListClient getHospitalListClient(){
         String BASE_URL = "https://maps.googleapis.com/maps/api/";
