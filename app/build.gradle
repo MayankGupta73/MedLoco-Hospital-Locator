@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0-beta2"
     defaultConfig {
         applicationId "com.mayank7319gmail.hospitallocator"
         minSdkVersion 16

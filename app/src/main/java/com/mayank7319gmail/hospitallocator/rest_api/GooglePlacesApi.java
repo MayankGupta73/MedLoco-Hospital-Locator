@@ -31,7 +31,7 @@ public class GooglePlacesApi {
 
     public GooglePlacesApi(Context ctx) {
         this.ctx = ctx;
-        WEB_KEY = ctx.getString(R.string.google_maps_web_key);
+        WEB_KEY = ctx.getString(R.string.google_maps_key);
     }
 
     public HospitalListClient getHospitalListClient(){
