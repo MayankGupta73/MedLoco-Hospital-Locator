@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class GooglePlacesApi {
 
     public static String WEB_KEY;
-    public final static int SEARCH_RADIUS = 3000;
+    public final static int SEARCH_RADIUS = 5000;
 
     public static final int TYPE_HOSPITAL = 0;
     public static final int TYPE_DOCTOR = 1;

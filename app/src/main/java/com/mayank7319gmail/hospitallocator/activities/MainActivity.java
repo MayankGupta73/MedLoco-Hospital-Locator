@@ -312,13 +312,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                Log.d(TAG, "onResponse: Response recieved");
                 placeList = response.body();
 
-                if(placeList != null){
-                    for(int i = 0; i<10; i++){ //Limiting to 10 right now
+                if(placeList != null && placeList.places != null){
+                    int s = placeList.places.size();
+                    int len = s>10 ? 10 : s;    //Limiting to a maximum of 10 right now
+                    for(int i = 0; i<len; i++){
                         SinglePlace place = placeList.places.get(i);
                         addMapMarker(place.getLoc(),place.getName(),place.getVicinity());
                     }
 
                     getDistance();
+                }
+                else {
+                    // Display message for lack of results.
+                    Toast.makeText(ctx, "No results found in a 5km radius.",Toast.LENGTH_SHORT).show();
                 }
                 //addMapMarker(new LatLng(28.6566,77.18432),"Test loc","testing");
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curLocation,14));
