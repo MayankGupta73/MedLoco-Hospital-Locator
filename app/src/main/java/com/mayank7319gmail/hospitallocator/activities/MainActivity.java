@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                Log.d(TAG, "onResponse: Response recieved");
                 placeList = response.body();
 
-                if(placeList != null && placeList.places != null){
+                if(placeList != null && placeList.places != null && !placeList.places.isEmpty()){
                     int s = placeList.places.size();
                     int len = s>10 ? 10 : s;    //Limiting to a maximum of 10 right now
                     for(int i = 0; i<len; i++){
@@ -350,12 +350,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     void getDistance(){
+        if(placeList.places.isEmpty())
+            return;
+
         String destination = "";
 
         for(int i=0; i<placeList.places.size()-1; i++){
             SinglePlace place = placeList.places.get(i);
             destination += place.getLoc().latitude+ "," +place.getLoc().longitude+ "|";
         }
+
         SinglePlace place = placeList.places.get(placeList.places.size()-1);
         destination += place.getLoc().latitude+ "," +place.getLoc().longitude;
 
@@ -372,6 +376,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 if(distanceResult != null){
                     ArrayList<DistanceDuration> distanceDurations = distanceResult.getRows().get(0).getElements();
+                    if(distanceDurations == null)
+                        return;
+
                     for(int i=0; i<distanceDurations.size(); i++){
                         DistanceDuration d = distanceDurations.get(i);
 
@@ -383,6 +390,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         placeList.places.get(i).setTimeMinutes(d.getDuration().getValue());
                         placeList.places.get(i).setTimeString(d.getDuration().getText());
                     }
+                }
+                else{
+                    Toast.makeText(ctx, "Unable to fetch data from the server. Please try again later",Toast.LENGTH_SHORT).show();
                 }
             }
 
