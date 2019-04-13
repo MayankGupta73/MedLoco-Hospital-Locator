@@ -6,4 +6,7 @@
         android:icon="@drawable/places_ic_search"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.widget.SearchView" />
+    <item android:title="Privacy Policy"
+          android:id="@+id/privacy"
+          app:showAsAction="never"/>
 </menu>

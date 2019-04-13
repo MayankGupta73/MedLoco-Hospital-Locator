@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     int locationType = GooglePlacesApi.TYPE_HOSPITAL;
     int locationRankby = GooglePlacesApi.RANKBY_PROMINENCE;
+
+    public static final String  privacy_policy_url = "https://medloco-privacy-policy-git-master.mayankg.now.sh/";
 
     LocationManager locMan;
     LocationListener locLis;
@@ -479,5 +483,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 searchManager.getSearchableInfo(getComponentName()));
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.privacy:
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(privacy_policy_url));
+                startActivity(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 }
